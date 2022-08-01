@@ -41,24 +41,26 @@ const MyRoutines = ({ token, username }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const newRoutine = await createRoutine(name, goal, isPublic, token);
-        
+
         if(newRoutine.error) {
             setMessage(`${newRoutine.message} ${newRoutine.name}`);
             setMessageOpen(true);
         }
         else {
+            const allMyRoutines = await fetchAllMyRoutines(token, username);
+            setRoutines(allMyRoutines);
             setName('');
             setGoal('');
             setIsPublic(false);
             setOpen(false);
-            navigate("/routines", { replace: true });
         }
     }
 
     const handleDeleteRoutine = async (routineId) => {
         if(window.confirm('Are you sure to delete this routine?') === true) {
             await deleteRoutine(routineId, token);
-            navigate("/routines");
+            const allMyRoutines = await fetchAllMyRoutines(token, username);
+            setRoutines(allMyRoutines);
         }
     }
 
@@ -138,7 +140,7 @@ const MyRoutines = ({ token, username }) => {
                             <p>Name: {routine.name}</p>
                             <p>Goal: {routine.goal}</p>
                             <p>Creator: {routine.creatorName}</p>
-                            {routine.activities.length ? 
+                            {routine.activities && routine.activities.length ? 
                             <div>
                             <h4>Activities:</h4>
                             {routine.activities.map((activity, index) => {

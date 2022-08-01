@@ -34,10 +34,8 @@ const Activities = ({ token }) => {
             setMessageOpen(true);
         }
         else {
-            const allActivities = [...activities];
-            allActivities.push(newActivity);
+            const allActivities = await fetchAllActivities();
             setActivities(allActivities);
-            
             setName('');
             setDescription('');
             setOpen(false);
