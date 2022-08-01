@@ -28,11 +28,16 @@ const Activities = ({ token }) => {
         event.preventDefault();
         
         const newActivity = await createActivity(name, description, token);
+        
         if(newActivity.error) {
             setMessage(`${newActivity.message} ${newActivity.name}`);
             setMessageOpen(true);
         }
         else {
+            const allActivities = [...activities];
+            allActivities.push(newActivity);
+            setActivities(allActivities);
+            
             setName('');
             setDescription('');
             setOpen(false);
