@@ -4,7 +4,7 @@ import { Container, Box, Button, Modal, Snackbar, TextField,
 import { createRoutine, fetchAllMyRoutines, deleteRoutine } from "../api";
 import { Link } from "react-router-dom";
 
-const MyRoutines = ({ routines, setRoutines, token, username }) => { 
+const MyRoutines = ({ myRoutines, setMyRoutines, token, username }) => { 
 
     const [name, setName] = useState('');
     const [goal, setGoal] = useState('');
@@ -43,7 +43,7 @@ const MyRoutines = ({ routines, setRoutines, token, username }) => {
         }
         else {
             const allMyRoutines = await fetchAllMyRoutines(token, username);
-            setRoutines(allMyRoutines);
+            setMyRoutines(allMyRoutines);
             setName('');
             setGoal('');
             setIsPublic(false);
@@ -55,14 +55,14 @@ const MyRoutines = ({ routines, setRoutines, token, username }) => {
         if(window.confirm('Are you sure to delete this routine?') === true) {
             await deleteRoutine(routineId, token);
             const allMyRoutines = await fetchAllMyRoutines(token, username);
-            setRoutines(allMyRoutines);
+            setMyRoutines(allMyRoutines);
         }
     }
 
     useEffect(() => {
         const fetchMyRoutines = async () => {
             const allMyRoutines = await fetchAllMyRoutines(token, username);
-            setRoutines(allMyRoutines);
+            setMyRoutines(allMyRoutines);
         }
         fetchMyRoutines();
 
@@ -117,9 +117,9 @@ const MyRoutines = ({ routines, setRoutines, token, username }) => {
             :
             null
             }
-            {routines.length ? 
+            {myRoutines && myRoutines.length ? 
             <Stack spacing={2}>
-                {routines.map((routine, index) => {
+                {myRoutines.map((routine, index) => {
                     return (
                         <Item key={routine.id} sx={{ width: '800px' }}>
                             <h3>My Routine #{index + 1}</h3>
@@ -140,7 +140,10 @@ const MyRoutines = ({ routines, setRoutines, token, username }) => {
                             </div>
                             : null}
                             <Link to={`/myroutines/${routine.id}`}>
-                                <Button variant="outlined">Edit Route</Button>
+                                <Button variant="outlined">Edit Routine</Button>
+                            </Link>
+                            <Link to={`/myroutines/${routine.id}/add-activity`}>
+                                <Button variant="outlined">Add Activity</Button>
                             </Link>
                             <Button variant="outlined" color="error" onClick={() => {handleDeleteRoutine(routine.id)}}>Delete</Button>
                         </Item>

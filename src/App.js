@@ -6,13 +6,14 @@ import {
   Activities,
   Routines,
   MyRoutines,
-  EditRoutine
+  EditRoutine,
+  AddActivity
 } from './components';
 
 const App = () => {
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [username, setUsername] = useState(window.localStorage.getItem('username'));
-  const [routines, setRoutines] = useState([]);
+  const [myRoutines, setMyRoutines] = useState([]);
 
   return (
     <BrowserRouter>
@@ -20,9 +21,10 @@ const App = () => {
       <Route path='/' element={<Layout token={token} setToken={setToken} setUsername={setUsername}/>}>
         <Route index element={<Home />} />
         <Route path='/activities' element={<Activities token={token} />} />
-        <Route path='/routines' element={<Routines token={token} />} />
-        {token ? <Route path='/myroutines' element={<MyRoutines routines={routines} setRoutines={setRoutines} token={token} username={username}/>} /> : null}
-        {token ? <Route path='/myroutines/:routineId' element={<EditRoutine routines={routines} token={token}/>} /> : null}
+        <Route path='/routines' element={<Routines />} />
+        {token ? <Route path='/myroutines' element={<MyRoutines myRoutines={myRoutines} setMyRoutines={setMyRoutines} token={token} username={username}/>} /> : null}
+        {token ? <Route path='/myroutines/:routineId' element={<EditRoutine myRoutines={myRoutines} token={token}/>} /> : null}
+        {token ? <Route path='/myroutines/:routineId/add-activity' element={<AddActivity token={token}/>} /> : null}
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Route>
     </Routes>

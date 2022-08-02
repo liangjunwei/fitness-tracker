@@ -3,10 +3,10 @@ import { Container, Box, Button, TextField, FormControlLabel, Checkbox } from "@
 import { useParams, useNavigate } from "react-router-dom";
 import { editRoutine } from "../api";
 
-const EditRoutine = ({ routines, token }) => {
+const EditRoutine = ({ myRoutines, token }) => {
     let { routineId } = useParams();
     let navigate = useNavigate();
-    const routine = routines.filter((routine) => routine.id === parseInt(routineId));
+    const routine = myRoutines.filter((routine) => routine.id === parseInt(routineId));
 
     const [name, setName] = useState(routine[0].name);
     const [goal, setGoal] = useState(routine[0].goal);

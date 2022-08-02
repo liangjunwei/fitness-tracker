@@ -188,3 +188,28 @@ export const editRoutine = async (name, goal, isPublic, routineId, token) => {
         console.error(e);
     }
 }
+
+// add activity to routine
+export const AddActivityToRoutine = async (routineId, activityId, count, duration, token) => {
+    const url = `${BASE_URL}/routines/${routineId}/activities`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                activityId,
+                count,
+                duration
+            })
+        });
+        const data = await response.json();
+        return data;
+    }
+    catch(e) {
+        console.error(e);
+    }
+}
