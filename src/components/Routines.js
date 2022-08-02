@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Box, Stack, Paper, styled } from "@mui/material";
 import { fetchAllPublicRoutines } from "../api";
 
-const Routines = ({ token }) => { 
+const Routines = () => { 
 
     const [routines, setRoutines] = useState([]);
   

@@ -48,3 +48,11 @@ a {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+#remove-activity-button {
+    margin-left: 20px;
+}
+
+#remove-activity-button:hover {
+    cursor: pointer;
+}
