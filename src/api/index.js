@@ -233,3 +233,27 @@ export const deleteActivityFromRoutine = async (routineActivityId, token) => {
         console.error(e);
     }
 }
+
+// update activity
+export const updateActivity = async (count, duration, routineActivityId, token) => {
+    const url = `${BASE_URL}/routine_activities/${routineActivityId}`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                count,
+                duration
+            })
+        });
+        const data = await response.json();
+        return data;
+    }
+    catch(e) {
+        console.error(e);
+    }
+}

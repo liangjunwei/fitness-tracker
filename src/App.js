@@ -7,7 +7,8 @@ import {
   Routines,
   MyRoutines,
   EditRoutine,
-  AddActivity
+  AddActivity,
+  UpdateActivity
 } from './components';
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
         {token ? <Route path='/myroutines' element={<MyRoutines myRoutines={myRoutines} setMyRoutines={setMyRoutines} token={token} username={username}/>} /> : null}
         {token ? <Route path='/myroutines/:routineId' element={<EditRoutine myRoutines={myRoutines} token={token}/>} /> : null}
         {token ? <Route path='/myroutines/:routineId/add-activity' element={<AddActivity token={token}/>} /> : null}
+        {token ? <Route path='/myroutines/update-activity/:routineActivityId' element={<UpdateActivity token={token}/>} /> : null}
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Route>
     </Routes>

@@ -144,6 +144,9 @@ const MyRoutines = ({ myRoutines, setMyRoutines, token, username }) => {
                                                 <p>- Duration: {activity.duration} minutes</p>
                                                 <p>- Count: {activity.count}</p>
                                             </div>
+                                            <Link to={`/myroutines/update-activity/${activity.routineActivityId}`}>
+                                                <Button variant="outlined" size="small">Update</Button>
+                                            </Link>
                                             <HighlightOffIcon id='remove-activity-button' onClick={() => {handleDeleteActivity(activity.routineActivityId)}}/>
                                         </div>
                             })}
