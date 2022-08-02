@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Container, Box, Button, Modal, Snackbar, TextField,
          Alert, FormControlLabel, Checkbox, Stack, styled, Paper } from "@mui/material";
-import { createRoutine, fetchAllMyRoutines, deleteRoutine } from "../api";
+import { createRoutine, fetchAllMyRoutines, deleteRoutine, deleteActivityFromRoutine } from "../api";
 import { Link } from "react-router-dom";
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 const MyRoutines = ({ myRoutines, setMyRoutines, token, username }) => { 
 
@@ -57,6 +58,12 @@ const MyRoutines = ({ myRoutines, setMyRoutines, token, username }) => {
             const allMyRoutines = await fetchAllMyRoutines(token, username);
             setMyRoutines(allMyRoutines);
         }
+    }
+
+    const handleDeleteActivity = async (routineActivityId) => {
+        await deleteActivityFromRoutine(routineActivityId, token);
+        const allMyRoutines = await fetchAllMyRoutines(token, username);
+        setMyRoutines(allMyRoutines);
     }
 
     useEffect(() => {
@@ -130,11 +137,14 @@ const MyRoutines = ({ myRoutines, setMyRoutines, token, username }) => {
                             <div>
                             <h4>Activities:</h4>
                             {routine.activities.map((activity, index) => {
-                                return <div key={index}>
-                                            <p>{index + 1}: {activity.name}</p>
-                                            <p>- Description: {activity.description}</p>
-                                            <p>- Duration: {activity.duration} minutes</p>
-                                            <p>- Count: {activity.count}</p>
+                                return <div key={index} style={{display: 'flex', alignItems: 'center'}}>
+                                            <div>
+                                                <p>{index + 1}: {activity.name}</p>
+                                                <p>- Description: {activity.description}</p>
+                                                <p>- Duration: {activity.duration} minutes</p>
+                                                <p>- Count: {activity.count}</p>
+                                            </div>
+                                            <HighlightOffIcon id='remove-activity-button' onClick={() => {handleDeleteActivity(activity.routineActivityId)}}/>
                                         </div>
                             })}
                             </div>
