@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Container, Box, Button, Modal, Snackbar, TextField,
          Alert, FormControlLabel, Checkbox, Stack, styled, Paper } from "@mui/material";
-import { createRoutine, fetchAllMyRoutines, deleteRoutine, editRoutine } from "../api";
+import { createRoutine, fetchAllMyRoutines, deleteRoutine } from "../api";
+import { Link } from "react-router-dom";
 
-const MyRoutines = ({ token, username }) => { 
+const MyRoutines = ({ routines, setRoutines, token, username }) => { 
 
-    const [routines, setRoutines] = useState([]);
     const [name, setName] = useState('');
     const [goal, setGoal] = useState('');
     const [isPublic, setIsPublic] = useState(false);
     const [messageOpen, setMessageOpen] = useState(false);
     const [message, setMessage] = useState('');
-
-    const [displayRoutineEditForm, setDisplayRoutineEditForm] = useState(false);
-    const [displayId, setDisplayId] = useState(-1);
 
     // create routine modal
     const [open, setOpen] = useState(false);
@@ -62,18 +59,6 @@ const MyRoutines = ({ token, username }) => {
         }
     }
 
-    const handleRoutineEdit = async (event) => {
-        event.preventDefault();
-        await editRoutine(name, goal, isPublic, displayId, token);
-        setDisplayRoutineEditForm(false);
-
-        const allMyRoutines = await fetchAllMyRoutines(token, username);
-        setRoutines(allMyRoutines);
-        setName('');
-        setGoal('');
-        setIsPublic(false);
-    }
-    
     useEffect(() => {
         const fetchMyRoutines = async () => {
             const allMyRoutines = await fetchAllMyRoutines(token, username);
@@ -154,29 +139,10 @@ const MyRoutines = ({ token, username }) => {
                             })}
                             </div>
                             : null}
-                            <Button variant="outlined" onClick={() => {
-                                setDisplayRoutineEditForm(!displayRoutineEditForm);
-                                setDisplayId(routine.id);
-                                }}>Edit Route</Button>
+                            <Link to={`/myroutines/${routine.id}`}>
+                                <Button variant="outlined">Edit Route</Button>
+                            </Link>
                             <Button variant="outlined" color="error" onClick={() => {handleDeleteRoutine(routine.id)}}>Delete</Button>
-                            {displayRoutineEditForm && routine.id === displayId ?
-                            <form id='routine-edit-form' onSubmit={handleRoutineEdit} style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center'}}>
-                                <h4>Edit Your Routine Below</h4>
-                                <TextField id="editedRoutineName" label="Name" variant="outlined" value={name} sx={{width: '50%'}}
-                                           required type="text" onChange={(e) => setName(e.target.value)}/>
-                                <TextField id="editedRoutineGoal" label="Goal" variant="outlined" value={goal} sx={{width: '50%'}}
-                                           required type="text" onChange={(e) => setGoal(e.target.value)}/>
-                                <FormControlLabel control={<Checkbox id="editedRoutineIsPublic" onChange={(e) => setIsPublic(e.target.checked)}/>} 
-                                      label="Is Public?" checked={isPublic}/>
-                                <Button variant="contained" type="submit">Save Changes</Button>
-                                <Button variant="outlined" onClick={() => {setDisplayRoutineEditForm(!displayRoutineEditForm)}}>Cancel</Button>
-                            </form> 
-                            :
-                            null
-                            }
                         </Item>
                     )
                 })}

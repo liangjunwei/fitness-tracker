@@ -5,12 +5,14 @@ import {
   Home,
   Activities,
   Routines,
-  MyRoutines
+  MyRoutines,
+  EditRoutine
 } from './components';
 
 const App = () => {
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [username, setUsername] = useState(window.localStorage.getItem('username'));
+  const [routines, setRoutines] = useState([]);
 
   return (
     <BrowserRouter>
@@ -19,7 +21,8 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path='/activities' element={<Activities token={token} />} />
         <Route path='/routines' element={<Routines token={token} />} />
-        {token ? <Route path='/myroutines' element={<MyRoutines token={token} username={username}/>} /> : null}
+        {token ? <Route path='/myroutines' element={<MyRoutines routines={routines} setRoutines={setRoutines} token={token} username={username}/>} /> : null}
+        {token ? <Route path='/myroutines/:routineId' element={<EditRoutine routines={routines} token={token}/>} /> : null}
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Route>
     </Routes>
