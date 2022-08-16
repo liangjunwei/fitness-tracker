@@ -25,14 +25,14 @@ const EditRoutine = ({ myRoutines, token }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center'}}>
-                <h4>Edit Your Routine Below</h4>
+                <h2 className='sub-title'>Edit Your Routine Below</h2>
                 <TextField id="editedRoutineName" label="Name" variant="outlined" value={name} sx={{width: '50%'}}
                             margin="normal" required type="text" onChange={(e) => setName(e.target.value)}/>
                 <TextField id="editedRoutineGoal" label="Goal" variant="outlined" value={goal} sx={{width: '50%'}}
                             margin="normal" required type="text" onChange={(e) => setGoal(e.target.value)}/>
                 <FormControlLabel control={<Checkbox id="editedRoutineIsPublic" onChange={(e) => setIsPublic(e.target.checked)}/>} 
                         label="Is Public?" checked={isPublic}/>
-                <Button variant="contained" type="submit">Save Changes</Button>
+                <Button variant="contained" type="submit" sx={{marginTop: '15px'}}>Save Changes</Button>
             </form> 
             </Box>
         </Container>

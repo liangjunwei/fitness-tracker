@@ -39,7 +39,7 @@ const AddActivity = ({ token }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center'}}>
-                <h4>Select Your Activity Below</h4>
+                <h2 className='sub-title'>Select Your Activity Below</h2>
                 <FormControl fullWidth>
                     <InputLabel id="activity-select-label">Activity</InputLabel>
                     <Select
@@ -56,11 +56,11 @@ const AddActivity = ({ token }) => {
                         })}
                     </Select>
                 </FormControl>
-                <TextField id="editedRoutineName" label="Count" variant="outlined" value={count}
+                <TextField id="activityCount" label="Count" variant="outlined" value={count}
                             margin="normal" required type="text" onChange={(e) => setCount(e.target.value)}/>
-                <TextField id="editedRoutineGoal" label="Duration" variant="outlined" value={duration}
+                <TextField id="activityDuration" label="Duration(minutes)" variant="outlined" value={duration}
                             margin="normal" required type="text" onChange={(e) => setDuration(e.target.value)}/>
-                <Button variant="contained" type="submit">Add Activity</Button>
+                <Button variant="contained" type="submit" sx={{marginTop: '15px'}}>Add Activity</Button>
             </form> 
             </Box>
         </Container>

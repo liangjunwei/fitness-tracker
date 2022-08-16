@@ -43,17 +43,16 @@ const Nav = ({ token, setToken, setUsername }) => {
     return (
         <Box id='nav-bar' sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <div>
-                {/* <Tab label="Home" onClick={handleHomeClick}/> */}
-                <Link to='/'>Home</Link>
-                <Link to='/activities'>Activities</Link>
-                <Link to='/routines'>Routines</Link>
-                {token ? <Link to='/myroutines'>My Routines</Link> : null}                
+                <Link to='/'><h3 className='nav-tab'>Home</h3></Link>
+                <Link to='/activities'><h3 className='nav-tab'>Activities</h3></Link>
+                <Link to='/routines'><h3 className='nav-tab'>Routines</h3></Link>
+                {token ? <Link to='/myroutines'><h3 className='nav-tab'>My Routines</h3></Link> : null}                
             </div>
             {token ? 
-            <div><Button variant="contained" onClick={handleLogOutClick}>Log Out</Button></div>
+            <div style={{marginRight: '10px'}}><Button variant="contained" color="secondary" onClick={handleLogOutClick}>Log Out</Button></div>
             :
-            <div>
-                <Button onClick={handleOpen}>Login/Register</Button>
+            <div style={{marginRight: '10px'}}>
+                <Button onClick={handleOpen} variant="contained">Log In</Button>
                 <Modal open={open} onClose={handleClose}
                        aria-labelledby="modal-modal-title"
                        aria-describedby="modal-modal-description">

@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+body {
+    background: linear-gradient(to bottom, #b0e8fa 0%, #f5bfda 100%); 
+    background-attachment: fixed;
+}
+
 h1, h2 {
     text-align: center;
 }
@@ -15,8 +20,19 @@ h3, h4 {
 
 a {
     text-decoration: none;
-    display: inline-block;
-    padding: 10px;
+}
+
+#title {
+    font-family: 'DynaPuff', cursive;
+    font-family: 'Kanit', sans-serif;
+    font-size: 3.5em;
+}
+
+.sub-title {
+    font-family: 'DynaPuff', cursive;
+    font-family: 'Kanit', sans-serif;
+    font-size: 2em;
+    margin: 15px;
 }
 
 #home-page {
@@ -27,7 +43,6 @@ a {
 }
 
 #content-box {
-    margin-top: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,6 +52,21 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+#nav-bar a {
+    display: inline-block;
+    padding: 10px;
+}
+
+#nav-bar a:hover {
+    background-color: #97dff8;
+}
+
+#nav-tab {
+    font-family: 'DynaPuff', cursive;
+    font-family: 'Kanit', sans-serif;
+    font-size: 1em;
 }
 
 #submit-button {

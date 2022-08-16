@@ -76,15 +76,16 @@ const Activities = ({ token }) => {
 
     return (
     <Container maxWidth="lg">
+        <h2 className='sub-title'>Activities</h2>
         <Box id="content-box" sx={{ width: '100%' }}>
             {token ? 
             <div>
-                <Button onClick={handleOpen}>Create Activity</Button>
+                <Button onClick={handleOpen} sx={{padding: '10px', margin: '10px'}}>Create Activity</Button>
                     <Modal open={open} onClose={handleClose}
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description">
                         <Box sx={modalStyle}>
-                            <h2>Create Activity</h2>
+                            <h2 className='sub-title'>Create Activity</h2>
                             <form onSubmit={handleSubmit}
                                   style={{
                                     display: 'flex',
