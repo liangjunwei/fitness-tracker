@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Box, Button, Modal, Snackbar, TextField,
-         Alert, FormControlLabel, Checkbox, Stack, styled, Paper } from "@mui/material";
+         Alert, FormControlLabel, Checkbox, Stack, styled, Paper, Divider } from "@mui/material";
 import { createRoutine, fetchAllMyRoutines, deleteRoutine, deleteActivityFromRoutine } from "../api";
 import { Link } from "react-router-dom";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
@@ -89,16 +89,17 @@ const MyRoutines = ({ myRoutines, setMyRoutines, token, username }) => {
     };
 
     return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{minHeight: '100vh'}}>
+        <h2 className='sub-title'>My Routines</h2>
         <Box id="content-box" sx={{ width: '100%' }}>
             {token ? 
             <div>
-                <Button onClick={handleOpen}>Create Routine</Button>
+                <Button onClick={handleOpen} sx={{padding: '10px', margin: '10px'}}>Create Routine</Button>
                     <Modal open={open} onClose={handleClose}
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description">
                         <Box sx={modalStyle}>
-                            <h2>Create Routine</h2>
+                            <h2 className='sub-title'>Create Routine</h2>
                             <form onSubmit={handleSubmit}
                                   style={{
                                     display: 'flex',
@@ -145,20 +146,23 @@ const MyRoutines = ({ myRoutines, setMyRoutines, token, username }) => {
                                                 <p>- Count: {activity.count}</p>
                                             </div>
                                             <Link to={`/myroutines/update-activity/${activity.routineActivityId}`}>
-                                                <Button variant="outlined" size="small">Update</Button>
+                                                <Button variant="outlined" size="small" sx={{marginLeft: '20px'}}>Update</Button>
                                             </Link>
                                             <HighlightOffIcon id='remove-activity-button' onClick={() => {handleDeleteActivity(activity.routineActivityId)}}/>
                                         </div>
                             })}
                             </div>
                             : null}
-                            <Link to={`/myroutines/${routine.id}`}>
-                                <Button variant="outlined">Edit Routine</Button>
-                            </Link>
-                            <Link to={`/myroutines/${routine.id}/add-activity`}>
-                                <Button variant="outlined">Add Activity</Button>
-                            </Link>
-                            <Button variant="outlined" color="error" onClick={() => {handleDeleteRoutine(routine.id)}}>Delete</Button>
+                            <Divider sx={{marginTop: '10px', marginBottom: '10px'}}/>
+                            <div style={{display: 'flex', alignItems: 'center'}}>
+                                <Link to={`/myroutines/${routine.id}`}>
+                                    <Button variant="outlined" sx={{marginRight: '10px'}}>Edit Routine</Button>
+                                </Link>
+                                <Link to={`/myroutines/${routine.id}/add-activity`}>
+                                    <Button variant="outlined" sx={{marginRight: '10px'}}>Add Activity</Button>
+                                </Link>
+                                <Button variant="outlined" color="error" onClick={() => {handleDeleteRoutine(routine.id)}}>Delete</Button>
+                            </div>
                         </Item>
                     )
                 })}

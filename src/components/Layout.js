@@ -1,7 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
-// import Footer from "./Footer";
+import Footer from "./Footer";
+import { Divider } from "@mui/material";
 
 const Layout = ({ token, setToken, setUsername }) => {
   // basic layout header, content, footer  
@@ -9,7 +10,8 @@ const Layout = ({ token, setToken, setUsername }) => {
         <>
           <Header token={token} setToken={setToken} setUsername={setUsername} />
           <Outlet />
-          {/* <Footer /> */}
+          <Divider sx={{marginTop: '10px', marginBottom: '10px'}}/>
+          <Footer />
         </>
     )
 }

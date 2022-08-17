@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Box, Stack, Paper, styled, Button, Modal, Snackbar, TextField, Alert } from "@mui/material";
+import { Container, Box, Stack, Paper, styled, Button, Modal, Snackbar, TextField, Alert, Pagination } from "@mui/material";
 import { fetchAllActivities, createActivity } from "../api";
 
 const Activities = ({ token }) => { 
@@ -9,6 +9,11 @@ const Activities = ({ token }) => {
     const [description, setDescription] = useState('');
     const [messageOpen, setMessageOpen] = useState(false);
     const [message, setMessage] = useState('');
+
+    const [page, setPage] = useState(1);
+    const handlePageChange = (event, value) => {
+        setPage(value);
+    };
 
     // create activity modal
     const [open, setOpen] = useState(false);
@@ -75,16 +80,17 @@ const Activities = ({ token }) => {
     
 
     return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{minHeight: '100vh'}}>
+        <h2 className='sub-title'>Activities</h2>
         <Box id="content-box" sx={{ width: '100%' }}>
             {token ? 
             <div>
-                <Button onClick={handleOpen}>Create Activity</Button>
+                <Button onClick={handleOpen} sx={{padding: '10px', margin: '10px'}}>Create Activity</Button>
                     <Modal open={open} onClose={handleClose}
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description">
                         <Box sx={modalStyle}>
-                            <h2>Create Activity</h2>
+                            <h2 className='sub-title'>Create Activity</h2>
                             <form onSubmit={handleSubmit}
                                   style={{
                                     display: 'flex',
@@ -108,17 +114,23 @@ const Activities = ({ token }) => {
             :
             null
             }
-            <Stack spacing={2}>
-                {activities.map((activity, index) => {
+            {activities.length ? 
+            <Stack spacing={2} sx={{width: '70%'}}>
+                {activities[page - 1].map((activity, index) => {
                     return (
                         <Item key={activity.id}>
-                            <h3>Activity #{index + 1}</h3>
+                            <h3>Activity #{(page - 1) * 20 + index + 1}</h3>
                             <p>Name: {activity.name}</p>
                             <p>Description: {activity.description}</p>
                         </Item>
                     )
                 })}
             </Stack>
+            : null }
+            <Pagination sx={{marginTop: '15px', marginBottom: '15px'}} 
+                        count={activities.length}
+                        page={page} color="primary" onChange={handlePageChange} 
+            />
         </Box>
     </Container>
   )

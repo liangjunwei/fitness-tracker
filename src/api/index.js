@@ -1,6 +1,7 @@
-const BASE_URL = 'https://fitnesstrac-kr.herokuapp.com/api';
+const BASE_URL = 'https://desolate-atoll-43736.herokuapp.com/api';
 // 'https://fitnesstrac-kr.herokuapp.com/api'
 // 'https://desolate-atoll-43736.herokuapp.com/api';
+// 'http://localhost:3000/api';
 
 // fetch all activities
 export const fetchAllActivities = async () => {
@@ -9,6 +10,27 @@ export const fetchAllActivities = async () => {
     try {
         const response = await fetch(url);
         const data = await response.json();
+
+        const constructedData = [];
+        for(let i = 0; i < data.length; i += 20) {
+            constructedData.push(data.slice(i, i + 20));
+        }
+
+        return constructedData;
+    }
+    catch(e) {
+        console.error(e);
+    }
+}
+
+// fetch all activities in array
+export const fetchAllActivitiesInArray = async () => {
+    const url = `${BASE_URL}/activities`;
+    
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
         return data;
     }
     catch(e) {
@@ -23,7 +45,13 @@ export const fetchAllPublicRoutines = async () => {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        return data;
+
+        const constructedData = [];
+        for(let i = 0; i < data.length; i += 10) {
+            constructedData.push(data.slice(i, i + 10));
+        }
+
+        return constructedData;
     }
     catch(e) {
         console.error(e);

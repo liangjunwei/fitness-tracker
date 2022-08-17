@@ -38,7 +38,7 @@ const Login = ({ setLoginOrRegister, setToken, setUsername }) => {
     
     return (
         <>
-            <h2>Login</h2>
+            <h2 className='sub-title'>Login</h2>
             <form onSubmit={handleSubmit}
                   style={{
                     display: 'flex',

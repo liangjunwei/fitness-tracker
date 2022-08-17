@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Box, Button, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
-import { AddActivityToRoutine, fetchAllActivities } from "../api";
+import { AddActivityToRoutine, fetchAllActivitiesInArray } from "../api";
 
 const AddActivity = ({ token }) => {
     let { routineId } = useParams();
@@ -24,7 +24,7 @@ const AddActivity = ({ token }) => {
 
     useEffect(() => {
         const fetchActivities = async () => {
-            const allActivities = await fetchAllActivities();
+            const allActivities = await fetchAllActivitiesInArray();
             setActivities(allActivities);
         }
         fetchActivities();
@@ -33,13 +33,13 @@ const AddActivity = ({ token }) => {
     }, []);
 
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" sx={{height: '100vh'}}>
             <Box sx={{ width: '100%' }}>
             <form id='add-activity-form' onSubmit={handleSubmit} style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center'}}>
-                <h4>Select Your Activity Below</h4>
+                <h2 className='sub-title'>Select Your Activity Below</h2>
                 <FormControl fullWidth>
                     <InputLabel id="activity-select-label">Activity</InputLabel>
                     <Select
@@ -56,11 +56,11 @@ const AddActivity = ({ token }) => {
                         })}
                     </Select>
                 </FormControl>
-                <TextField id="editedRoutineName" label="Count" variant="outlined" value={count}
+                <TextField id="activityCount" label="Count" variant="outlined" value={count}
                             margin="normal" required type="text" onChange={(e) => setCount(e.target.value)}/>
-                <TextField id="editedRoutineGoal" label="Duration" variant="outlined" value={duration}
+                <TextField id="activityDuration" label="Duration(minutes)" variant="outlined" value={duration}
                             margin="normal" required type="text" onChange={(e) => setDuration(e.target.value)}/>
-                <Button variant="contained" type="submit">Add Activity</Button>
+                <Button variant="contained" type="submit" sx={{marginTop: '15px'}}>Add Activity</Button>
             </form> 
             </Box>
         </Container>
