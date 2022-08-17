@@ -36,10 +36,18 @@ a {
 }
 
 #home-page {
-    height: 70vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+#footer {
+    padding: 30px;
+    text-align: center;
+    font-family: 'DynaPuff', cursive;
+    font-family: 'Kanit', sans-serif;
+    font-size: 1em;
 }
 
 #content-box {

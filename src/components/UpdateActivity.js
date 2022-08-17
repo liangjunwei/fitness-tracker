@@ -17,7 +17,7 @@ const UpdateActivity = ({ token }) => {
     }
 
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" sx={{height: '100vh'}}>
             <Box sx={{ width: '100%' }}>
             <form id='update-activity-form' onSubmit={handleSubmit} style={{
                 display: 'flex',

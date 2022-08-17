@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Box, Button, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
-import { AddActivityToRoutine, fetchAllActivities } from "../api";
+import { AddActivityToRoutine, fetchAllActivitiesInArray } from "../api";
 
 const AddActivity = ({ token }) => {
     let { routineId } = useParams();
@@ -24,7 +24,7 @@ const AddActivity = ({ token }) => {
 
     useEffect(() => {
         const fetchActivities = async () => {
-            const allActivities = await fetchAllActivities();
+            const allActivities = await fetchAllActivitiesInArray();
             setActivities(allActivities);
         }
         fetchActivities();
@@ -33,7 +33,7 @@ const AddActivity = ({ token }) => {
     }, []);
 
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" sx={{height: '100vh'}}>
             <Box sx={{ width: '100%' }}>
             <form id='add-activity-form' onSubmit={handleSubmit} style={{
                 display: 'flex',

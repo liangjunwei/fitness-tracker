@@ -19,7 +19,7 @@ const EditRoutine = ({ myRoutines, token }) => {
     }
 
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" sx={{height: '100vh'}}>
             <Box sx={{ width: '100%' }}>
             <form id='routine-edit-form' onSubmit={handleRoutineEdit} style={{
                 display: 'flex',

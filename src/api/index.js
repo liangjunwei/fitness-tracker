@@ -22,6 +22,21 @@ export const fetchAllActivities = async () => {
     }
 }
 
+// fetch all activities in array
+export const fetchAllActivitiesInArray = async () => {
+    const url = `${BASE_URL}/activities`;
+    
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        return data;
+    }
+    catch(e) {
+        console.error(e);
+    }
+}
+
 // fetch all public routines
 export const fetchAllPublicRoutines = async () => {
     const url = `${BASE_URL}/routines`;

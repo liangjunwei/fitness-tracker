@@ -29,7 +29,7 @@ const Routines = () => {
     }, []);
 
     return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{minHeight: '100vh'}}>
         <h2 className='sub-title'>Routines</h2>
         <Box id="content-box" sx={{ width: '100%' }}>
             {routines.length ?
