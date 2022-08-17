@@ -29,7 +29,13 @@ export const fetchAllPublicRoutines = async () => {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        return data;
+
+        const constructedData = [];
+        for(let i = 0; i < data.length; i += 10) {
+            constructedData.push(data.slice(i, i + 10));
+        }
+
+        return constructedData;
     }
     catch(e) {
         console.error(e);
