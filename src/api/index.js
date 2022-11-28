@@ -1,4 +1,4 @@
-const BASE_URL = 'https://desolate-atoll-43736.herokuapp.com/api';
+const BASE_URL = 'https://fitness-dev.onrender.com/api';
 // 'https://fitnesstrac-kr.herokuapp.com/api'
 // 'https://desolate-atoll-43736.herokuapp.com/api';
 // 'http://localhost:3000/api';
